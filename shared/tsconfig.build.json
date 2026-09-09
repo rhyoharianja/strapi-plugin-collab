@@ -1,0 +1,14 @@
+{
+  "extends": "../server/tsconfig",
+  "include": ["./*.ts"],
+  "exclude": ["**/*.test.ts"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../dist/shared",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "composite": false,
+    "incremental": false
+  }
+}

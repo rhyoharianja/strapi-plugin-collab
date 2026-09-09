@@ -1,0 +1,108 @@
+{
+  "name": "strapi-plugin-collab",
+  "version": "0.1.0",
+  "description": "Real-time collaborative editing (Yjs + Hocuspocus) for the Strapi Content Hub",
+  "author": "Suryo Galih Kencana Harianja <harianja.suryo@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "strapi",
+    "strapi-plugin",
+    "content-hub",
+    "collaboration",
+    "yjs",
+    "hocuspocus",
+    "crdt"
+  ],
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-admin": {
+      "types": "./dist/admin/src/index.d.ts",
+      "source": "./admin/src/index.ts",
+      "import": "./dist/admin/index.mjs",
+      "require": "./dist/admin/index.js",
+      "default": "./dist/admin/index.js"
+    },
+    "./strapi-server": {
+      "types": "./dist/server/src/index.d.ts",
+      "source": "./server/src/index.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "shared",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "strapi-plugin build && tsc -p shared/tsconfig.build.json",
+    "dev": "strapi-plugin watch",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link",
+    "verify": "strapi-plugin verify",
+    "lint": "tsc -p admin/tsconfig.json --noEmit && tsc -p server/tsconfig.json --noEmit",
+    "clean": "rimraf dist .turbo",
+    "test:ts:front": "tsc -p admin/tsconfig.json",
+    "test:ts:back": "tsc -p server/tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@hocuspocus/server": "^4.6.0",
+    "@hocuspocus/provider": "^4.6.0",
+    "yjs": "^13.6.32",
+    "y-protocols": "^1.0.7",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "@strapi/admin": "^5.52.3",
+    "@strapi/design-system": "^2.2.4",
+    "@strapi/icons": "^2.2.4",
+    "@strapi/sdk-plugin": "^6.1.1",
+    "@strapi/strapi": "^5.52.3",
+    "@strapi/typescript-utils": "^5.52.3",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@types/ws": "^8.18.1",
+    "prettier": "^3.9.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-intl": "^6.8.9",
+    "react-router-dom": "^6.30.6",
+    "rimraf": "^6.0.1",
+    "styled-components": "^6.5.3",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  },
+  "peerDependencies": {
+    "@strapi/strapi": "^5.52.3",
+    "@strapi/sdk-plugin": "^6.1.1",
+    "@strapi/design-system": "^2.2.4",
+    "@strapi/icons": "^2.2.4",
+    "react-intl": "^6.8.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.6",
+    "styled-components": "^6.5.3",
+    "@strapi/admin": "^5.52.3"
+  },
+  "strapi": {
+    "kind": "plugin",
+    "name": "content-hub-collab",
+    "displayName": "Collab",
+    "description": "Real-time collaborative editing (Yjs + Hocuspocus) for the Strapi Content Hub"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhyoharianja/strapi-plugin-collab.git"
+  },
+  "homepage": "https://github.com/rhyoharianja/strapi-plugin-collab#readme",
+  "bugs": {
+    "url": "https://github.com/rhyoharianja/strapi-plugin-collab/issues"
+  }
+}

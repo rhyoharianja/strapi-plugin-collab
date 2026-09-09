@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# environment & credentials
+.env
+.env.local
+.env.*.local
+.npmrc
+
+# build output
+dist/
+build/
+.turbo/
+.cache/
+*.tsbuildinfo
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# editors / os
+.DS_Store
+Thumbs.db
