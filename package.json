@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "strapi-plugin build && tsc -p shared/tsconfig.build.json",
+    "prepublishOnly": "pnpm run build",
     "dev": "strapi-plugin watch",
     "watch": "strapi-plugin watch",
     "watch:link": "strapi-plugin watch:link",
