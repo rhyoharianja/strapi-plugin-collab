@@ -1,9 +1,9 @@
 /** Contract shared by this plugin's server and admin bundles. */
 
-export const PLUGIN_ID = 'content-hub-collab' as const;
+export const PLUGIN_ID = 'collab' as const;
 
 /** WebSocket path the provider connects to, on Strapi's own port. */
-export const SOCKET_PATH = '/content-hub-collab' as const;
+export const SOCKET_PATH = '/collab' as const;
 
 /**
  * Name of the shared Yjs document.

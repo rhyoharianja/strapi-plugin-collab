@@ -95,7 +95,7 @@ const collab = ({ strapi }: { strapi: Core.Strapi }) => {
       const settings = config();
 
       hocuspocus = new Hocuspocus({
-        name: 'content-hub-collab',
+        name: 'collab',
 
         // Commit only after the typing stops. Persisting on every keystroke would write to
         // Postgres dozens of times a second per editor.
@@ -143,7 +143,7 @@ const collab = ({ strapi }: { strapi: Core.Strapi }) => {
 
           const rbac = isPresenceRoom(parsed.field)
             ? null
-            : strapi.plugin('content-hub-field-rbac');
+            : strapi.plugin('rbac');
 
           try {
             if (rbac) {

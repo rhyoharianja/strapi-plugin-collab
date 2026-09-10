@@ -1,1 +1,1 @@
-export const PLUGIN_ID = "content-hub-collab";
+export const PLUGIN_ID = "collab";

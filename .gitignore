@@ -1,5 +1,7 @@
 # dependencies
 node_modules/
+# lockfile paket library: tidak dipakai konsumen, hanya hasil install lokal
+pnpm-lock.yaml
 .pnpm-store/
 
 # environment & credentials

@@ -1,5 +1,7 @@
 # strapi-plugin-collab
 
+[![npm](https://img.shields.io/npm/v/strapi-plugin-collab?logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/strapi-plugin-collab) ![license MIT](https://img.shields.io/badge/license-MIT-3DA639) ![Strapi 5](https://img.shields.io/badge/Strapi-5-4945FF?logo=strapi&logoColor=white) ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![React 18](https://img.shields.io/badge/React-18-20232A?logo=react&logoColor=white) ![Yjs CRDT](https://img.shields.io/badge/Yjs-CRDT-2F2F2F) ![Hocuspocus websocket](https://img.shields.io/badge/Hocuspocus-websocket-000000)
+
 Collaborative editing for Strapi 5, in two layers:
 
 - **Field locking on every field.** While someone is editing a field, it is disabled for
@@ -11,7 +13,7 @@ Collaborative editing for Strapi 5, in two layers:
 The first is what prevents the collision people actually hit; the second is for when you want
 two people in the same paragraph.
 
-Part of [Strapi Content Hub](../../README.md).
+One of a family of standalone Strapi 5 plugins — see [the others](https://github.com/rhyoharianja?tab=repositories).
 
 ## Install
 
@@ -22,7 +24,7 @@ pnpm add strapi-plugin-collab
 ```ts
 // config/plugins.ts
 export default {
-  'content-hub-collab': {
+  'collab': {
     enabled: true,
     resolve: 'strapi-plugin-collab',
     config: {
@@ -34,12 +36,18 @@ export default {
 };
 ```
 
+> **Keep the key `collab` exactly as it is.** It is the plugin id, and the id is
+> compiled into the package — the admin menu link, the `plugin::collab.*`
+> custom-field uids, the route prefix and every internal `strapi.plugin(...)` lookup.
+> Renaming it does not rename those, so the plugin half-loads and fails in ways that do
+> not look like a naming problem. `resolve` points at the package; the key does not.
+
 Then add the field to a content-type:
 
 ```jsonc
 "editorialNotes": {
   "type": "customField",
-  "customField": "plugin::content-hub-collab.text"
+  "customField": "plugin::collab.text"
 }
 ```
 
@@ -54,8 +62,8 @@ handshake carries the same origin as the admin panel.
 
 ```mermaid
 flowchart LR
-    B1["browser A"] -->|"ws /content-hub-collab"| H
-    B2["browser B"] -->|"ws /content-hub-collab"| H
+    B1["browser A"] -->|"ws /collab"| H
+    B2["browser B"] -->|"ws /collab"| H
 
     H{{"Strapi http server<br/>upgrade event, noServer: true"}} --> HP["Hocuspocus"]
     HP --> Y[("Y.Doc<br/>one per uid|documentId|field")]
@@ -105,7 +113,7 @@ the stable contract and always agrees with however the panel currently authentic
 
 **The session is authorised, not each keystroke.** That is the only place field-level
 permission can apply here: the eventual commit happens outside any HTTP request, so the
-[field-RBAC](../strapi-plugin-field-rbac/README.md) middleware sees no acting user and
+[field-RBAC](https://github.com/rhyoharianja/strapi-plugin-rbac) middleware sees no acting user and
 treats it as a system write. If the user's role may not write the field, the session joins
 **read-only** — they still see the live document and who else is in it, they just cannot
 type. Refusing outright would be less useful and no safer.

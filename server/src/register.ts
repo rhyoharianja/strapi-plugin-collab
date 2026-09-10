@@ -10,7 +10,7 @@ import { PLUGIN_ID } from '../../shared/collab';
  *
  *   "editorialNotes": {
  *     "type": "customField",
- *     "customField": "plugin::content-hub-collab.text"
+ *     "customField": "plugin::collab.text"
  *   }
  */
 const register = ({ strapi }: { strapi: Core.Strapi }) => {
